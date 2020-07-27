@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(MeshFilter))]
 public class ChunkGenerator : MonoBehaviour
 {
     [SerializeField] private int chunkSize;
-    [SerializeField] private float offset;
+    [SerializeField] private float frequency;
     [SerializeField] private float scale;
     private Vector3[] m_Vertices;
     private int[] m_Triangles;
@@ -18,7 +19,7 @@ public class ChunkGenerator : MonoBehaviour
     private void Awake()
     {
         Assert.IsFalse(chunkSize == 0);
-        Assert.IsFalse(offset == 0);
+        Assert.IsFalse(frequency == 0);
         Assert.IsFalse(scale == 0);
     }
 
@@ -30,7 +31,13 @@ public class ChunkGenerator : MonoBehaviour
         UpdateMesh();
     }
 
-    
+    private void Update()
+    {
+        /*CreateShape();
+        UpdateMesh();*/
+    }
+
+
     private void CreateShape()
     {
        m_Vertices = new Vector3[(int) Math.Pow(chunkSize + 1, 2)];
@@ -39,7 +46,7 @@ public class ChunkGenerator : MonoBehaviour
        {
            for (int x = 0; x <= chunkSize; x++)
            {
-               float y = Mathf.PerlinNoise(x * offset, z * offset) * scale;
+               float y = Mathf.PerlinNoise(x * scale + frequency, z * scale + frequency);
                m_Vertices[i] = new Vector3(x, y, z);
                i++;
            }

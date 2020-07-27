@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2858c3cbee0687d45a66df1528aa1086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunkSize: 16
-  offset: 0.3
+  chunkSize: 256
+  frequency: 0.1
   scale: 2
 --- !u!23 &338106981
 MeshRenderer:
