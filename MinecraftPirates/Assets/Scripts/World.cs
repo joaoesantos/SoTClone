@@ -15,6 +15,8 @@ public class World : Singleton<World>
     [SerializeField] private int worldZ = 32;
     [SerializeField] private int chunkSize = 16;
 
+    private List<Building> m_WorldBuldings;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,11 @@ public class World : Singleton<World>
                 chunkComponent.InitialZ = z * chunkSize;
             }
         }
+    }
+
+    public void AddBuilding(Building building)
+    {
+        m_WorldBuldings.Add(building);
     }
 
     // Update is called once per frame

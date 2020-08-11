@@ -9,6 +9,13 @@ public class CameraController : MonoBehaviour
     [SerializeField] private int height;
 
     [SerializeField] private float distance;
+
+    [SerializeField] private float verticalCameraSpeed;
+    [SerializeField] private float horizontalCameraSpeed;
+
+    private float m_RotX;
+
+    private float m_RotY;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,12 +31,14 @@ public class CameraController : MonoBehaviour
         }
 
         var eulerAngles = player.eulerAngles;
-        float x = eulerAngles.x;
-        float y = eulerAngles.y;
-        
-        Quaternion rotation = Quaternion.Euler(x, y, 0);
-        
+
+        m_RotX -= Input.GetAxis("Mouse Y") * verticalCameraSpeed;
+        m_RotY += Input.GetAxis("Mouse X") * horizontalCameraSpeed;
+        m_RotX = Mathf.Clamp(m_RotX, -10, 90);
+        Quaternion rotation = Quaternion.Euler(m_RotX, m_RotY, 0);
         transform.rotation = rotation;
+        player.rotation = Quaternion.Euler(eulerAngles.x, m_RotY, 0);
+        
         transform.position = 
             player.position - 
             (rotation * Vector3.forward * distance + new Vector3(0, -height, 0));

@@ -353,7 +353,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 673294076}
   height: 1
-  distance: 2
+  distance: 3
+  verticalCameraSpeed: 10
+  horizontalCameraSpeed: 10
 --- !u!1001 &1883587650
 PrefabInstance:
   m_ObjectHideFlags: 0
