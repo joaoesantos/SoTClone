@@ -19,5 +19,27 @@ public class PlayerController : MonoBehaviour
         float horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         
         transform.Translate(horizontalMovement,0, verticalMovement);
+        if (BuildingSystem.Instance.IsBuilding)
+        {
+            if (Input.GetKeyDown(KeyCode.R)) //rotate
+            {
+                BuildingSystem.Instance.RotateObject();
+            }
+
+            if (Input.GetKeyDown(KeyCode.G)) // cancel button
+            {
+                BuildingSystem.Instance.CancelBuild();
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                BuildingSystem.Instance.PlaceObject();
+            }
+        }
+        
+        if (Input.GetMouseButtonDown(0)) //start build
+        {
+            BuildingSystem.Instance.StartBuilding(transform, BuildingSystem.BuildingType.HULL);
+        }
     }
 }

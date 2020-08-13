@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,4 +44,5 @@ public class CameraController : MonoBehaviour
             player.position - 
             (rotation * Vector3.forward * distance + new Vector3(0, -height, 0));
     }
+    
 }
