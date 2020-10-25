@@ -6,7 +6,7 @@ public class World : Singleton<World>
 {
     
     [SerializeField] private GameObject chunk;
-    [SerializeField] private byte[,,] worldData;
+    [SerializeField] private GameObject[,] worldData;
     
     [SerializeField] private int worldX = 32;
 
@@ -20,6 +20,9 @@ public class World : Singleton<World>
     {
         var xChunks = worldX / chunkSize;
         var zChunks = worldZ / chunkSize;
+
+        // ReSharper disable once HeapView.ObjectAllocation.Evident
+        worldData = new GameObject[worldX, worldZ];
 
         for (int x = 0; x < xChunks; x++)
         {
@@ -37,6 +40,7 @@ public class World : Singleton<World>
                 chunkComponent.ChunkSize = chunkSize;
                 chunkComponent.InitialX = x * chunkSize;
                 chunkComponent.InitialZ = z * chunkSize;
+                worldData[x, z] = newChunk;
             }
         }
     }

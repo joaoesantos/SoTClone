@@ -55,7 +55,10 @@ public class BuildingSystem : Singleton<BuildingSystem>
         
         if (Physics.Raycast(ray, out hit))
         {
-            m_ObjectToPreview.transform.position = hit.point;
+            if(hit.collider.gameObject.tag.Equals("Ground"))
+            {
+                m_ObjectToPreview.transform.position = hit.point;
+            }
         }
     }
 
